@@ -33,7 +33,7 @@ const contactItems = [
 
 export function ContactSection() {
   return (
-    <MotionSection id="contact" className="py-20 sm:py-24">
+    <MotionSection id="contact" className="py-14 sm:py-24">
       <Container>
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>

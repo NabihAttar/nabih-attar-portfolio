@@ -29,7 +29,7 @@ const highlights = [
 
 export function AboutSection() {
   return (
-    <MotionSection id="about" className="py-20 sm:py-24">
+    <MotionSection id="about" className="py-14 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="About"

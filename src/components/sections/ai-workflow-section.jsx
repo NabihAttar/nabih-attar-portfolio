@@ -32,7 +32,7 @@ const workflowItems = [
 
 export function AiWorkflowSection() {
   return (
-    <MotionSection className="py-20 sm:py-24">
+    <MotionSection className="py-14 sm:py-24">
       <Container>
         <div className="rounded-[2rem] border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 via-slate-900 to-slate-950 p-8 shadow-2xl shadow-cyan-950/10 sm:p-10">
           <SectionHeading

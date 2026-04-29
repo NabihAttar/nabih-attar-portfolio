@@ -13,7 +13,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.18),_transparent_34%),radial-gradient(circle_at_80%_20%,_rgba(59,130,246,0.16),_transparent_28%),linear-gradient(180deg,_rgba(15,23,42,0.4),_rgba(2,6,23,0.9))]" />
       <div className="absolute inset-x-0 top-[-5rem] h-60 bg-cyan-400/10 blur-3xl" />
 
-      <Container className="relative py-18 sm:py-24 lg:py-32">
+      <Container className="relative py-14 sm:py-24 lg:py-32">
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="max-w-3xl">
             <motion.span

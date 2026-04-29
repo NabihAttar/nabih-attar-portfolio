@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 export function EducationSection() {
   return (
-    <MotionSection className="py-20 sm:py-24">
+    <MotionSection className="py-14 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="Education & Certifications"

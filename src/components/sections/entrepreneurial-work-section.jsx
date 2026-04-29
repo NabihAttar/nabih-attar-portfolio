@@ -11,7 +11,7 @@ export function EntrepreneurialWorkSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <MotionSection id="entrepreneurial-work" className="py-20 sm:py-24">
+    <MotionSection id="entrepreneurial-work" className="py-14 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow={entrepreneurialWork.title}

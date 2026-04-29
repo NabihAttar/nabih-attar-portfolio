@@ -10,7 +10,7 @@ export function ExperienceSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <MotionSection id="experience" className="py-20 sm:py-24">
+    <MotionSection id="experience" className="py-14 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="Experience"
