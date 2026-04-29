@@ -1,4 +1,7 @@
-import { BriefcaseBusiness, Code2, Mail, MapPin, Phone } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { BriefcaseBusiness, Code2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { personalInfo } from "@/data/portfolio";
 import { Container } from "@/components/ui/container";
 import { MotionSection } from "@/components/ui/motion-section";
@@ -32,6 +35,26 @@ const contactItems = [
 ];
 
 export function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const subject = `Portfolio Contact from ${formData.name}`;
+    const body = `${formData.name}\n${formData.email}\n\n${formData.message}`;
+    const gmailComposeUrl =
+      `https://mail.google.com/mail/?view=cm&fs=1` +
+      `&to=${encodeURIComponent(personalInfo.email)}` +
+      `&su=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    window.open(gmailComposeUrl, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <MotionSection id="contact" className="py-14 sm:py-24">
       <Container>
@@ -53,22 +76,65 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {contactItems.map(({ label, value, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noreferrer" : undefined}
-                className="rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-cyan-300/30 hover:bg-white/[0.08]"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
-                  <Icon size={20} />
-                </div>
-                <p className="mt-5 text-sm text-slate-400">{label}</p>
-                <p className="mt-2 text-base font-medium text-white">{value}</p>
-              </a>
-            ))}
+          <div className="space-y-4">
+            <form
+              onSubmit={handleSubmit}
+              className="rounded-3xl border border-white/10 bg-white/5 p-6"
+            >
+              <p className="text-base font-semibold text-white">Send me an email</p>
+              <p className="mt-1 text-sm text-slate-400">
+                Fill this form and your email app will open with your message ready to send.
+              </p>
+
+              <div className="mt-5 space-y-3">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  required
+                  value={formData.name}
+                  onChange={(event) =>
+                    setFormData((prev) => ({ ...prev, name: event.target.value }))
+                  }
+                  className="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-300/50"
+                />
+        
+                <textarea
+                  placeholder="Your Message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={(event) =>
+                    setFormData((prev) => ({ ...prev, message: event.target.value }))
+                  }
+                  className="w-full resize-none rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-300/50"
+                />
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                >
+                  Send Email
+                  <Send size={16} />
+                </button>
+              </div>
+            </form>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {contactItems.map(({ label, value, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noreferrer" : undefined}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-cyan-300/30 hover:bg-white/[0.08]"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
+                    <Icon size={20} />
+                  </div>
+                  <p className="mt-5 text-sm text-slate-400">{label}</p>
+                  <p className="mt-2 text-base font-medium text-white">{value}</p>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </Container>
