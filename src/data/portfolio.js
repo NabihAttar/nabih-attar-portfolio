@@ -11,7 +11,7 @@ export const personalInfo = {
   title: "Frontend Developer | React.js & Next.js Developer",
   intro:
     "I am a Frontend Developer based in Beirut, Lebanon, specializing in React.js, Next.js, JavaScript, Tailwind CSS, and responsive web development. I build modern websites, e-commerce platforms, multilingual web applications, API-integrated systems, and desktop applications using Electron.js.",
-  cvPath: "/cv/Nabih_Al_Attar_ATS_CV.docx",
+  cvPath: "/cv/Nabih_Al_Attar_ATS_CV_with_Portfolio.docx",
 };
 
 export const navItems = [
@@ -79,7 +79,6 @@ export const projectFilters = [
   "All",
   "Next.js",
   "React.js",
-  "API Integration",
   "E-commerce",
   "Desktop App",
   "Freelance",
@@ -90,7 +89,7 @@ export const projects = [
     title: "Novalyft Solutions Website",
     description:
       "Official company website for Novalyft Solutions with responsive pages and a polished modern UI.",
-    technologies: ["Next.js", "React.js"],
+    technologies: ["Next.js", "React.js", "Bootstrap", "CSS", "SCSS", "JavaScript"],
     category: "Company Website",
     liveDemo: "https://www.novalyftsolutions.com",
     featuredFilter: ["All", "Next.js", "React.js"],
@@ -100,7 +99,7 @@ export const projects = [
     title: "Elite Movers Website",
     description:
       "Responsive website for a moving services company focused on clarity, trust, and lead generation.",
-    technologies: ["Next.js", "React.js"],
+    technologies: ["Next.js", "React.js", "CSS", "JavaScript", "SCSS"],
     category: "Business Website",
     liveDemo: "https://elite-movers-website.vercel.app",
     featuredFilter: ["All", "Next.js", "React.js"],
@@ -110,7 +109,7 @@ export const projects = [
     title: "Kidz Holding Website",
     description:
       "Responsive company website with clean layouts and reusable frontend components.",
-    technologies: ["Next.js", "React.js"],
+    technologies: ["Next.js", "React.js", "TypeScript", "SCSS", "HTML", "CSS", "JavaScript"],
     category: "Company Website",
     liveDemo: "https://kidz-holding-website.vercel.app",
     featuredFilter: ["All", "Next.js", "React.js"],
@@ -120,17 +119,17 @@ export const projects = [
     title: "Euro Tech Website",
     description:
       "Car products website supporting English and French, integrated with Odoo API.",
-    technologies: ["Next.js", "React.js", "Odoo API"],
-    category: "Multilingual Product Website",
+    technologies: ["Next.js", "React.js", "Odoo API", "SCSS", "JavaScript"],
+    category: "Multilingual E-commerce Website",
     liveDemo: "https://euro-tech-two.vercel.app/fr",
-    featuredFilter: ["All", "Next.js", "React.js", "API Integration"],
+    featuredFilter: ["All", "Next.js", "React.js", "API Integration", "E-commerce"],
     responsive: true,
   },
   {
     title: "Blynn E-commerce Website",
     description:
       "Cosmetics e-commerce website integrated with CMS APIs and built for a smooth shopping experience.",
-    technologies: ["Next.js", "React.js", "CMS APIs"],
+    technologies: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "CMS APIs"],
     category: "E-commerce Website",
     liveDemo: "https://blynn-website.vercel.app",
     featuredFilter: ["All", "Next.js", "React.js", "API Integration", "E-commerce"],
@@ -152,6 +151,7 @@ export const projects = [
     technologies: ["Next.js", "React.js"],
     category: "Freelance Website",
     liveDemo: "https://alwafa-export-group-website.vercel.app",
+    github: "https://github.com/NabihAttar/ALWAFA-Website",
     featuredFilter: ["All", "Next.js", "React.js", "Freelance"],
     responsive: true,
   },
@@ -160,9 +160,10 @@ export const projects = [
     description:
       "Coffee shop website with informative pages, menu section, and QR code menu access.",
     technologies: ["Next.js", "React.js"],
-    category: "Coffee Shop Website",
+    category: "Freelance Coffee Shop Website",
     liveDemo: "https://my-spot-caffe-kappa.vercel.app/about-us",
-    featuredFilter: ["All", "Next.js", "React.js"],
+    github: "https://github.com/NabihAttar/My-Spot-Caffe",
+    featuredFilter: ["All", "Next.js", "React.js", "Freelance"],
     responsive: true,
   },
   {
@@ -181,8 +182,8 @@ export const projects = [
     description:
       "University group project for notary workflow management including login, clients, contracts, payments, reports, and PDF generation.",
     technologies: ["Java Swing", "MariaDB", "JDBC"],
-    category: "University Group Project",
-    featuredFilter: ["All", "Desktop App"],
+    category: "Freelance Desktop Application",
+    featuredFilter: ["All", "Desktop App", "Freelance"],
     responsive: false,
   },
 ];
