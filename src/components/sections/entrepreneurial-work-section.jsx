@@ -1,15 +1,10 @@
-"use client";
-
 import { ArrowUpRight, BriefcaseBusiness } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
 import { entrepreneurialWork } from "@/data/portfolio";
 import { Container } from "@/components/ui/container";
 import { MotionSection } from "@/components/ui/motion-section";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export function EntrepreneurialWorkSection() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <MotionSection id="entrepreneurial-work" className="py-14 sm:py-24">
       <Container>
@@ -19,14 +14,7 @@ export function EntrepreneurialWorkSection() {
           description="A part-time entrepreneurial and freelance software initiative that reflects practical execution, business awareness, and real-world solution building."
         />
 
-        <motion.article
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-          whileInView={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.22 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          whileHover={shouldReduceMotion ? {} : { y: -4 }}
-          className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-cyan-400/10 via-white/5 to-white/[0.02] p-7 shadow-2xl shadow-slate-950/10 sm:p-8"
-        >
+        <article className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-cyan-400/10 via-white/5 to-white/[0.02] p-7 shadow-2xl shadow-slate-950/10 transition-transform duration-200 ease-out motion-safe:hover:-translate-y-1 sm:p-8">
           <div className="flex flex-wrap items-center gap-3">
             {entrepreneurialWork.badges.map((badge) => (
               <span
@@ -70,7 +58,7 @@ export function EntrepreneurialWorkSection() {
             Visit Clothify Website
             <ArrowUpRight size={16} />
           </a>
-        </motion.article>
+        </article>
       </Container>
     </MotionSection>
   );

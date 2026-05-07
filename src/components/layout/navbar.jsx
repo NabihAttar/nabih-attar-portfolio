@@ -1,23 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navItems, personalInfo } from "@/data/portfolio";
 import { Container } from "@/components/ui/container";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 16);
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const closeMenu = () => setIsOpen(false);
@@ -27,13 +16,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
-        isScrolled
-          ? "border-white/10 bg-slate-950/85 shadow-[0_12px_40px_rgba(2,6,23,0.35)] backdrop-blur-xl"
-          : "border-transparent bg-slate-950/55 backdrop-blur-md"
-      }`}
-    >
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/85 shadow-[0_12px_40px_rgba(2,6,23,0.35)] backdrop-blur-xl">
       <Container>
         <div className="flex h-18 items-center justify-between gap-4 py-4">
           <a
@@ -78,39 +61,41 @@ export function Navbar() {
         </div>
       </Container>
 
-      <AnimatePresence initial={false}>
-        {isOpen ? (
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, height: 0 }}
-            animate={shouldReduceMotion ? {} : { opacity: 1, height: "auto" }}
-            exit={shouldReduceMotion ? {} : { opacity: 0, height: 0 }}
-            transition={{ duration: 0.24, ease: "easeOut" }}
-            className="overflow-hidden border-t border-white/10 bg-slate-950/95 md:hidden"
-          >
-            <Container className="pb-5">
-              <nav className="flex flex-col gap-2 pt-4">
-                {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="rounded-2xl px-4 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-                <a
-                  href={personalInfo.cvPath}
-                  download
-                  className="mt-2 inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-                >
-                  Download CV
-                </a>
-              </nav>
-            </Container>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      <div
+        aria-hidden={!isOpen}
+        className={`border-t border-white/10 bg-slate-950/95 md:hidden ${
+          isOpen ? "" : "pointer-events-none"
+        }`}
+        style={{
+          transformOrigin: "top",
+          transform: isOpen ? "scaleY(1)" : "scaleY(0.96)",
+          opacity: isOpen ? 1 : 0,
+          willChange: "transform, opacity",
+          transition: "transform 200ms ease-out, opacity 200ms ease-out",
+        }}
+      >
+        <Container className={`${isOpen ? "block" : "hidden"} pb-5`}>
+          <nav className="flex flex-col gap-2 pt-4">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="rounded-2xl px-4 py-3 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href={personalInfo.cvPath}
+              download
+              className="mt-2 inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+            >
+              Download CV
+            </a>
+          </nav>
+        </Container>
+      </div>
     </header>
   );
 }

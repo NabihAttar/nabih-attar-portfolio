@@ -5,6 +5,7 @@ import { personalInfo } from "@/data/portfolio";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {

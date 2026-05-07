@@ -37,6 +37,38 @@ body::before {
   z-index: -1;
 }
 
+main > section:not(#home):not(#about) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-hero-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    animation: hero-reveal-up 650ms ease-out forwards;
+  }
+
+  [data-hero-reveal="2"] {
+    animation-delay: 90ms;
+  }
+
+  [data-hero-reveal="3"] {
+    animation-delay: 170ms;
+  }
+
+  [data-hero-reveal="4"] {
+    animation-delay: 260ms;
+  }
+
+  @keyframes hero-reveal-up {
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
 a,
 button {
   transition:

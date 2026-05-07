@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Code2 } from "lucide-react";
 import { projectFilters, projects } from "@/data/portfolio";
 import { Container } from "@/components/ui/container";
@@ -10,7 +9,6 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 export function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState("All");
-  const shouldReduceMotion = useReducedMotion();
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") {
@@ -46,19 +44,12 @@ export function ProjectsSection() {
           ))}
         </div>
 
-        <motion.div layout className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.article
-                layout
-                key={project.title}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-                animate={shouldReduceMotion ? {} : { opacity: 1, y: 0 }}
-                exit={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                whileHover={shouldReduceMotion ? {} : { y: -6 }}
-                className="group flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl shadow-slate-950/10"
-              >
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filteredProjects.map((project) => (
+            <article
+              key={project.title}
+              className="group flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl shadow-slate-950/10 transition-transform duration-200 ease-out motion-safe:hover:-translate-y-1.5"
+            >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <span className="inline-flex max-w-full whitespace-normal break-words rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-2.5 py-1 text-[9px] font-semibold uppercase leading-tight tracking-[0.08em] text-cyan-300 sm:rounded-full sm:px-3 sm:text-xs sm:tracking-[0.22em]">
@@ -108,10 +99,9 @@ export function ProjectsSection() {
                     </a>
                   ) : null}
                 </div>
-              </motion.article>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+            </article>
+          ))}
+        </div>
       </Container>
     </MotionSection>
   );
