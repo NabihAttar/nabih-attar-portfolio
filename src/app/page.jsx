@@ -2,8 +2,8 @@ import dynamic from "next/dynamic";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { AboutSection } from "@/components/sections/about-section";
-import { AiWorkflowSection } from "@/components/sections/ai-workflow-section";
 import { HeroSection } from "@/components/sections/hero-section";
+import { SectionTransition } from "@/components/ui/reveal";
 
 const ExperienceSection = dynamic(
   () => import("@/components/sections/experience-section").then((mod) => mod.ExperienceSection),
@@ -36,13 +36,21 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <SectionTransition className="opacity-50" />
         <AboutSection />
+        <SectionTransition className="opacity-40" />
         <ExperienceSection />
+        <SectionTransition className="opacity-40" />
         <ProjectsSection />
+        <SectionTransition className="opacity-40" />
         <EntrepreneurialWorkSection />
+        <SectionTransition className="opacity-30" />
         <SkillsSection />
+        <SectionTransition className="opacity-30" />
         <AiWorkflowSectionLazy />
+        <SectionTransition className="opacity-30" />
         <EducationSection />
+        <SectionTransition className="opacity-30" />
         <ContactSection />
       </main>
       <Footer />

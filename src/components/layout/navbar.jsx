@@ -21,7 +21,7 @@ export function Navbar() {
         <div className="flex h-18 items-center justify-between gap-4 py-4">
           <a
             href="#home"
-            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/20 bg-white/5 text-sm font-semibold tracking-[0.3em] text-cyan-300 transition hover:border-cyan-300/40 hover:text-cyan-200"
+            className="perf-icon-link flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-400/20 bg-white/5 text-sm font-semibold tracking-[0.3em] text-cyan-300"
             aria-label="Go to home"
           >
             {personalInfo.initials}
@@ -32,7 +32,7 @@ export function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-slate-300 transition hover:text-white"
+                className="perf-nav-link text-sm text-slate-300"
               >
                 {item.label}
               </a>
@@ -43,7 +43,7 @@ export function Navbar() {
             <a
               href={personalInfo.cvPath}
               download
-              className="inline-flex items-center rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+              className="perf-btn-primary perf-magnetic inline-flex items-center rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950"
             >
               Download CV
             </a>
@@ -51,7 +51,7 @@ export function Navbar() {
 
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-100 transition hover:border-cyan-300/40 hover:text-cyan-200 md:hidden"
+            className="perf-icon-link inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-100 md:hidden"
             onClick={() => setIsOpen((open) => !open)}
             aria-expanded={isOpen}
             aria-label="Toggle navigation menu"
@@ -89,7 +89,7 @@ export function Navbar() {
             <a
               href={personalInfo.cvPath}
               download
-              className="mt-2 inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+              className="perf-btn-primary mt-2 inline-flex items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950"
             >
               Download CV
             </a>

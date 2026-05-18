@@ -29,6 +29,8 @@ export const aboutHighlights = [
   "Focused on frontend development with React.js, Next.js, TypeScript, and responsive UI systems.",
   "Hands-on experience with API integration, CMS APIs, Odoo API, e-commerce platforms, and multilingual websites.",
   "Built desktop ERP solutions with Electron.js and contributed to scalable, recruiter-friendly web experiences.",
+  "Focused on writing clean, maintainable, and scalable frontend code for long-term project growth.",
+  "Experienced in transforming UI/UX designs into responsive, clean, and production-ready web interfaces.",
 ];
 
 export const experiences = [

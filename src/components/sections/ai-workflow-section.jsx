@@ -1,6 +1,8 @@
 import { Bot, FileText, LayoutTemplate, Workflow } from "lucide-react";
+import { AnimatedCard } from "@/components/ui/animated-card";
 import { Container } from "@/components/ui/container";
 import { MotionSection } from "@/components/ui/motion-section";
+import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 const workflowItems = [
@@ -34,25 +36,27 @@ export function AiWorkflowSection() {
   return (
     <MotionSection className="py-14 sm:py-24">
       <Container>
-        <div className="rounded-[2rem] border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 via-slate-900 to-slate-950 p-8 shadow-2xl shadow-cyan-950/10 sm:p-10">
-          <SectionHeading
-            eyebrow="AI-Assisted Development"
-            title="Using AI workflows to turn business ideas into structured technical execution."
-            description="This approach supports planning, implementation clarity, documentation quality, debugging, and better communication between product goals and engineering work."
-          />
+        <AnimatedCard as="div" className="rounded-[2rem] border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 via-slate-900 to-slate-950 p-8 shadow-2xl shadow-cyan-950/10 sm:p-10">
+          <Reveal>
+            <SectionHeading
+              eyebrow="AI-Assisted Development"
+              title="Using AI workflows to turn business ideas into structured technical execution."
+              description="This approach supports planning, implementation clarity, documentation quality, debugging, and better communication between product goals and engineering work."
+            />
+          </Reveal>
 
           <div className="grid gap-5 md:grid-cols-2">
-            {workflowItems.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="rounded-3xl border border-white/10 bg-slate-950/60 p-6">
+            {workflowItems.map(({ icon: Icon, title, description }, index) => (
+              <AnimatedCard as="div" key={title} delay={0.08 + index * 0.04} className="rounded-3xl border border-white/10 bg-slate-950/60 p-6">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
                   <Icon size={20} />
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{description}</p>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
-        </div>
+        </AnimatedCard>
       </Container>
     </MotionSection>
   );

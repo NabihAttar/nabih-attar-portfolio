@@ -5,6 +5,7 @@ import { ArrowUpRight, Code2 } from "lucide-react";
 import { projectFilters, projects } from "@/data/portfolio";
 import { Container } from "@/components/ui/container";
 import { MotionSection } from "@/components/ui/motion-section";
+import { ParallaxSection, Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export function ProjectsSection() {
@@ -21,34 +22,41 @@ export function ProjectsSection() {
   return (
     <MotionSection id="projects" className="py-14 sm:py-24">
       <Container>
-        <SectionHeading
-          eyebrow="Projects"
-          title="Selected projects that highlight frontend execution, responsiveness, and API-connected experiences."
-          description="A curated set of websites and desktop applications spanning company platforms, e-commerce, multilingual products, and ERP workflows."
-        />
-
-        <div className="mb-8 flex flex-wrap gap-3">
-          {projectFilters.map((filter) => (
-            <button
-              key={filter}
-              type="button"
-              onClick={() => setActiveFilter(filter)}
-              className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
-                activeFilter === filter
-                  ? "border-cyan-300/40 bg-cyan-400 text-slate-950"
-                  : "border-white/10 bg-white/5 text-slate-300 hover:border-cyan-300/30 hover:text-white"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+        <div className="relative">
+          <ParallaxSection className="pointer-events-none absolute -right-10 top-0 hidden h-48 w-48 rounded-full bg-cyan-300/10 blur-3xl lg:block" offset={18} />
+          <Reveal>
+            <SectionHeading
+              eyebrow="Projects"
+              title="Selected projects that highlight frontend execution, responsiveness, and API-connected experiences."
+              description="A curated set of websites and desktop applications spanning company platforms, e-commerce, multilingual products, and ERP workflows."
+            />
+          </Reveal>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {filteredProjects.map((project) => (
+        <div className="mb-8 lg:sticky lg:top-24 lg:z-20 lg:rounded-2xl lg:border lg:border-white/10 lg:bg-slate-950/65 lg:p-4 lg:backdrop-blur">
+          <Reveal className="flex flex-wrap gap-3">
+            {projectFilters.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+                className={`rounded-full border px-4 py-2 text-sm font-medium ${
+                  activeFilter === filter
+                    ? "perf-filter-pill-active border-cyan-300/40 bg-cyan-400 text-slate-950"
+                    : "perf-filter-pill border-white/10 bg-white/5 text-slate-300"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </Reveal>
+        </div>
+
+        <Reveal className="grid gap-6 md:grid-cols-2 xl:grid-cols-3" delay={0.06}>
+          {filteredProjects.map((project, index) => (
             <article
               key={project.title}
-              className="group flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl shadow-slate-950/10 transition-transform duration-200 ease-out motion-safe:hover:-translate-y-1.5"
+              className="perf-card group flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl shadow-slate-950/10"
             >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -81,7 +89,7 @@ export function ProjectsSection() {
                       href={project.liveDemo}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                      className="perf-btn-primary inline-flex items-center gap-2 rounded-full bg-cyan-400 px-4 py-2.5 text-sm font-semibold text-slate-950"
                     >
                       Live Demo
                       <ArrowUpRight size={16} />
@@ -92,7 +100,7 @@ export function ProjectsSection() {
                       href={project.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition hover:border-cyan-300/40 hover:text-cyan-200"
+                      className="perf-btn-secondary inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white"
                     >
                       GitHub
                       <Code2 size={16} />
@@ -101,7 +109,7 @@ export function ProjectsSection() {
                 </div>
             </article>
           ))}
-        </div>
+        </Reveal>
       </Container>
     </MotionSection>
   );

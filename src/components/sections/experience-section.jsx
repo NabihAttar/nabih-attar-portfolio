@@ -1,22 +1,28 @@
 import { experiences } from "@/data/portfolio";
+import { AnimatedCard } from "@/components/ui/animated-card";
 import { Container } from "@/components/ui/container";
 import { MotionSection } from "@/components/ui/motion-section";
+import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export function ExperienceSection() {
   return (
     <MotionSection id="experience" className="py-14 sm:py-24">
       <Container>
-        <SectionHeading
-          eyebrow="Experience"
-          title="Professional experience across frontend delivery, public-sector systems, and IT training."
-          description="A reverse chronological timeline highlighting hands-on web development, technical training, and enterprise software exposure."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Experience"
+            title="Professional experience across frontend delivery, public-sector systems, and IT training."
+            description="A reverse chronological timeline highlighting hands-on web development, technical training, and enterprise software exposure."
+          />
+        </Reveal>
 
         <div className="relative space-y-6 before:absolute before:left-5 before:top-3 before:h-[calc(100%-2rem)] before:w-px before:bg-gradient-to-b before:from-cyan-400/60 before:to-transparent sm:before:left-1/2 sm:before:-translate-x-1/2">
           {experiences.map((item, index) => (
-            <article
+            <AnimatedCard
+              as="article"
               key={`${item.company}-${item.period}`}
+              delay={index * 0.06}
               className="relative grid gap-4 sm:grid-cols-2"
             >
               <div
@@ -48,7 +54,7 @@ export function ExperienceSection() {
 
                 <div className="absolute left-4 top-10 h-4 w-4 rounded-full border-4 border-slate-950 bg-cyan-300 sm:left-1/2 sm:-translate-x-1/2" />
               </div>
-            </article>
+            </AnimatedCard>
           ))}
         </div>
       </Container>

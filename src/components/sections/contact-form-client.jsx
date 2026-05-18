@@ -53,7 +53,7 @@ export function ContactFormClient() {
         />
         <button
           type="submit"
-          className="inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+          className="perf-btn-primary perf-magnetic inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950"
         >
           Send Email
           <Send size={16} />

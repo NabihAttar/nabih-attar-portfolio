@@ -1,0 +1,16 @@
+<svg width="1024" height="512" viewBox="0 0 1024 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="70" y1="40" x2="940" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6CC04A"/>
+      <stop offset="1" stop-color="#4B9F34"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="512" rx="48" fill="url(#bg)"/>
+  <g fill="#fff">
+    <path d="M312 198c-27.7 0-50 22.3-50 50v16c0 27.7 22.3 50 50 50h42v34h-42c-46.4 0-84-37.6-84-84v-16c0-46.4 37.6-84 84-84h42v34h-42z"/>
+    <path d="M412 202h45l39 33-39 33h-45l39-33-39-33z"/>
+  </g>
+  <text x="472" y="286" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="600" letter-spacing="1">
+    Clothify
+  </text>
+</svg>
