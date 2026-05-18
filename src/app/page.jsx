@@ -5,6 +5,21 @@ import { AboutSection } from "@/components/sections/about-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionTransition } from "@/components/ui/reveal";
 
+const SonicWaveScrollytellingHero = dynamic(
+  () =>
+    import("@/components/sections/sonicwave-scrollytelling-hero").then(
+      (mod) => mod.SonicWaveScrollytellingHero,
+    ),
+  {
+    loading: () => (
+      <div
+        className="h-[100dvh] w-full bg-[#050505]"
+        aria-hidden="true"
+      />
+    ),
+  },
+);
+
 const ExperienceSection = dynamic(
   () => import("@/components/sections/experience-section").then((mod) => mod.ExperienceSection),
 );
@@ -35,6 +50,7 @@ export default function Home() {
     <div className="min-h-screen bg-slate-950 text-white">
       <Navbar />
       <main>
+        <SonicWaveScrollytellingHero />
         <HeroSection />
         <SectionTransition className="opacity-50" />
         <AboutSection />

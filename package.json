@@ -6,7 +6,8 @@
     "dev": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "optimize:frames": "node scripts/optimize-sonicwave-frames.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
@@ -20,6 +21,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4"
   }
 }
