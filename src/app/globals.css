@@ -48,7 +48,7 @@ body::after {
   z-index: -1;
 }
 
-main > section:not(#home):not(#about):not(#projects):not(#sonicwave) {
+main > section:not(#home):not(#about):not(#projects) {
   content-visibility: auto;
   contain-intrinsic-size: 1px 900px;
 }
