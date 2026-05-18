@@ -22,6 +22,9 @@
 
 # misc
 .DS_Store
+
+# SonicWave source PNG sequence (local only; WebP assets are committed)
+/public/frames/
 *.pem
 
 # debug
