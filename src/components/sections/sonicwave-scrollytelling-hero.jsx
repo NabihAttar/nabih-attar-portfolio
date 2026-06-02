@@ -23,6 +23,7 @@ import {
 } from "@/lib/sonicwave-frames";
 
 const LERP_FACTOR = 0.14;
+const MOBILE_SEQUENCE_BG = "#040404";
 
 function lerp(current, target, factor) {
   return current + (target - current) * factor;
@@ -73,14 +74,16 @@ async function loadFrame(frameIndex, cache, mobile) {
   if (cache[frameIndex]) return cache[frameIndex];
 
   const { webp, png } = getSonicwaveFramePaths(frameIndex, mobile);
+  const primary = mobile ? png : webp;
+  const fallback = mobile ? webp : png;
 
   try {
-    const bitmap = await decodeFrame(webp);
+    const bitmap = await decodeFrame(primary);
     cache[frameIndex] = bitmap;
     return bitmap;
   } catch {
     try {
-      const bitmap = await decodeFrame(png);
+      const bitmap = await decodeFrame(fallback);
       cache[frameIndex] = bitmap;
       return bitmap;
     } catch {
@@ -225,6 +228,7 @@ export function SonicWaveScrollytellingHero() {
   const maxFrameIndex = frameIndices.length - 1;
   const sourceDimensions = getSonicwaveSourceDimensions(isMobile);
   const scrollHeightVh = getSonicwaveScrollHeightVh(isMobile);
+  const sequenceBg = isMobile ? MOBILE_SEQUENCE_BG : SONICWAVE_BG;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -234,6 +238,8 @@ export function SonicWaveScrollytellingHero() {
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08, 0.18], [1, 1, 0]);
   const subtitleOpacity = useTransform(scrollYProgress, [0.1, 0.28, 0.58, 0.75], [0, 1, 1, 0]);
   const subtitleY = useTransform(scrollYProgress, [0.1, 0.75], [40, -56]);
+  const titleOpacity = useTransform(scrollYProgress, [0.02, 0.14, 0.34, 0.48], [0, 1, 1, 0]);
+  const titleY = useTransform(scrollYProgress, [0.05, 0.46], [24, -28]);
   const ctaOpacity = useTransform(scrollYProgress, [0.82, 0.92, 1], [0, 1, 1]);
   const ctaY = useTransform(scrollYProgress, [0.82, 1], [28, 0]);
   const vignetteOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.35, 0.2, 0.2, 0.45]);
@@ -274,14 +280,17 @@ export function SonicWaveScrollytellingHero() {
         height,
         sourceDimensions.width,
         sourceDimensions.height,
+        sequenceBg,
       );
       canvasSizeRef.current = { width, height };
     },
-    [frameIndices, maxFrameIndex, sourceDimensions.width, sourceDimensions.height],
+    [frameIndices, maxFrameIndex, sequenceBg, sourceDimensions.width, sourceDimensions.height],
   );
 
   const renderFrameRef = useRef(renderFrame);
-  renderFrameRef.current = renderFrame;
+  useEffect(() => {
+    renderFrameRef.current = renderFrame;
+  }, [renderFrame]);
 
   const requestRedraw = useCallback((progress, force = false) => {
     renderStateRef.current = force ? { slot: -1, exact: false } : renderStateRef.current;
@@ -294,9 +303,12 @@ export function SonicWaveScrollytellingHero() {
     preloadAbortRef.current = controller;
 
     imagesRef.current = new Array(SONICWAVE_TOTAL_FRAMES);
-    setIsReady(false);
-    setIsFullyLoaded(false);
-    setLoadProgress(0);
+    Promise.resolve().then(() => {
+      if (controller.signal.aborted) return;
+      setIsReady(false);
+      setIsFullyLoaded(false);
+      setLoadProgress(0);
+    });
     renderStateRef.current = { slot: -1, exact: false };
 
     const batchSize = getSonicwavePreloadBatch();
@@ -417,13 +429,13 @@ export function SonicWaveScrollytellingHero() {
     <section
       id="sonicwave"
       ref={sectionRef}
-      className="relative bg-[#050505]"
-      style={{ height: `${scrollHeightVh}vh` }}
-      aria-label="Cinematic portfolio introduction"
+      className="relative"
+      style={{ height: `${scrollHeightVh}vh`, backgroundColor: sequenceBg }}
+      aria-label={isMobile ? "SonicWave Pro scrollytelling sequence" : "Cinematic portfolio introduction"}
     >
       <div
-        className="sticky top-0 z-40 h-[100dvh] w-full overflow-hidden bg-[#050505]"
-        style={{ willChange: "transform" }}
+        className="sticky top-0 z-40 h-[100dvh] w-full overflow-hidden"
+        style={{ backgroundColor: sequenceBg, willChange: "transform" }}
       >
         <canvas
           ref={canvasRef}
@@ -432,14 +444,25 @@ export function SonicWaveScrollytellingHero() {
         />
 
         <motion.div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,#050505_100%)]"
-          style={{ opacity: vignetteOpacity }}
+          className="pointer-events-none absolute inset-0"
+          style={{
+            opacity: vignetteOpacity,
+            background: `radial-gradient(ellipse_at_center, transparent 42%, ${sequenceBg} 100%)`,
+          }}
         />
 
-        <motion.div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-transparent to-[#050505]/70" />
+        <motion.div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: `linear-gradient(to bottom, ${sequenceBg}99 0%, transparent 45%, ${sequenceBg}b3 100%)`,
+          }}
+        />
 
         {!isReady && (
-          <motion.div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 bg-[#050505]">
+          <motion.div
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4"
+            style={{ backgroundColor: sequenceBg }}
+          >
             <div className="h-px w-40 overflow-hidden rounded-full bg-white/10">
               <motion.div
                 className="h-full w-full origin-left bg-white/70"
@@ -470,12 +493,25 @@ export function SonicWaveScrollytellingHero() {
         )}
 
         <motion.div className="pointer-events-none absolute inset-0 z-10 flex flex-col">
+          {isMobile && (
+            <motion.div
+              className="absolute left-5 right-5 top-16"
+              style={{ opacity: titleOpacity, y: titleY }}
+            >
+              <p className="text-[10px] uppercase tracking-[0.34em] text-white/60">SonicWave Pro</p>
+              <h1 className="mt-3 max-w-[15ch] text-4xl font-semibold tracking-tight text-white/90">
+                Sound Redefined
+              </h1>
+            </motion.div>
+          )}
+
           <motion.p
-            className="absolute bottom-32 inset-x-5 mx-auto max-w-xs text-center text-xs leading-relaxed text-white/40 sm:bottom-36 sm:inset-x-auto sm:left-12 sm:text-left sm:text-sm lg:left-20"
+            className="absolute bottom-32 inset-x-5 mx-auto max-w-xs text-center text-xs leading-relaxed text-white/60 sm:bottom-36 sm:inset-x-auto sm:left-12 sm:text-left sm:text-sm lg:left-20"
             style={{ opacity: subtitleOpacity, y: subtitleY }}
           >
-            Scroll through the sequence — design, code, and craft revealed frame
-            by frame.
+            {isMobile
+              ? "Scroll through every component as SonicWave Pro disassembles in cinematic detail."
+              : "Scroll through the sequence — design, code, and craft revealed frame by frame."}
           </motion.p>
 
           <motion.div
@@ -501,7 +537,7 @@ export function SonicWaveScrollytellingHero() {
               href="#projects"
               className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-6 py-3.5 text-xs font-medium text-white backdrop-blur-md transition-[transform,background-color,border-color] duration-300 hover:border-white/25 hover:bg-white/10 sm:gap-3 sm:px-8 sm:py-4 sm:text-sm"
             >
-              <span>View My Work</span>
+              <span>{isMobile ? "Pre-order SonicWave Pro" : "View My Work"}</span>
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-0.5">
                 →
               </span>

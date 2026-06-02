@@ -23,7 +23,15 @@ export function resizeCanvas(canvas, ctx, width, height, dpr) {
 /**
  * Cover-fit draw. Caps upscale so we never stretch beyond native frame resolution.
  */
-export function drawCoverFrame(ctx, image, width, height, sourceWidth, sourceHeight) {
+export function drawCoverFrame(
+  ctx,
+  image,
+  width,
+  height,
+  sourceWidth,
+  sourceHeight,
+  background = SONICWAVE_BG,
+) {
   const source =
     image instanceof ImageBitmap || image instanceof HTMLImageElement
       ? { w: image.width, h: image.height }
@@ -56,7 +64,7 @@ export function drawCoverFrame(ctx, image, width, height, sourceWidth, sourceHei
     offsetY = (height - drawHeight) / 2;
   }
 
-  ctx.fillStyle = SONICWAVE_BG;
+  ctx.fillStyle = background;
   ctx.fillRect(0, 0, width, height);
   ctx.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
 }

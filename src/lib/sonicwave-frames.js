@@ -11,11 +11,12 @@ export const SONICWAVE_MOBILE_HEIGHT = 540;
 /** @param {number} index 0-based frame index */
 export function getSonicwaveFramePaths(index, mobile = false) {
   const frame = String(index + 1).padStart(3, "0");
-  const folder = mobile ? "frames-webp-mobile" : "frames-webp";
+  const webpFolder = mobile ? "frames-webp-mobile" : "frames-webp";
+  const pngFolder = mobile ? "mobile-frames" : "frames";
 
   return {
-    webp: `/${folder}/ezgif-frame-${frame}.webp`,
-    png: `/frames/ezgif-frame-${frame}.png`,
+    webp: `/${webpFolder}/ezgif-frame-${frame}.webp`,
+    png: `/${pngFolder}/ezgif-frame-${frame}.png`,
   };
 }
 
