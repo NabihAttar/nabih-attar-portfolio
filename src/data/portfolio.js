@@ -169,6 +169,46 @@ export const projects = [
     responsive: true,
   },
   {
+    title: "ShopPlum",
+    description:
+      "A modern luxury lingerie e-commerce platform featuring curated collections, seamless shopping experiences, secure checkout, and an elegant user interface.",
+    technologies: ["Next.js", "Tailwind CSS", "E-commerce"],
+    category: "Freelance E-commerce Website",
+    liveDemo: "https://www.shopplum.co/",
+    featuredFilter: ["All", "Next.js", "E-commerce", "Freelance"],
+    responsive: true,
+  },
+  {
+    title: "Ward",
+    description:
+      "Premium flower shop e-commerce platform built with Next.js, featuring bouquet customization, online ordering, secure payments, and a modern responsive design.",
+    technologies: ["Next.js", "Tailwind CSS", "E-commerce"],
+    category: "Freelance E-commerce Website",
+    liveDemo: "https://www.wardlb.com/",
+    featuredFilter: ["All", "Next.js", "E-commerce", "Freelance"],
+    responsive: true,
+  },
+  {
+    title: "Pristine Breeze",
+    description:
+      "Complete digital solution for cleaning companies, reducing manual work, improving customer management, and creating a more efficient workflow for service operations.",
+    technologies: ["Next.js", "Tailwind CSS"],
+    category: "Freelance Informative Website",
+    liveDemo: "https://pristine-breeze.vercel.app",
+    featuredFilter: ["All", "Next.js", "Freelance"],
+    responsive: true,
+  },
+  {
+    title: "BEAM",
+    description:
+      "Modern bilingual web platform for BEAM Organization, including a responsive public website, admin dashboard, projects and news management, event registration, volunteer applications, donations, newsletters, SEO, and security.",
+    technologies: ["Next.js", "Tailwind CSS"],
+    category: "Freelance Informative Website",
+    liveDemo: "https://cl-web-beam.vercel.app",
+    featuredFilter: ["All", "Next.js", "Freelance"],
+    responsive: true,
+  },
+  {
     title: "ERP Desktop Application",
     description:
       "Individual ERP desktop application built from scratch with dashboard, invoices, quotations, contracts, clients, accounting, reports, login, and PDF generation.",
