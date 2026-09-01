@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { AboutSection } from "@/components/sections/about-section";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -41,8 +40,22 @@ const AiWorkflowSectionLazy = dynamic(
 const EducationSection = dynamic(
   () => import("@/components/sections/education-section").then((mod) => mod.EducationSection),
 );
-const ContactSection = dynamic(
-  () => import("@/components/sections/contact-section").then((mod) => mod.ContactSection),
+const CursorTrailContactSection = dynamic(
+  () =>
+    import("@/components/sections/cursor-trail-contact-section").then(
+      (mod) => mod.CursorTrailContactSection,
+    ),
+  {
+    loading: () => (
+      <section
+        id="contact"
+        className="flex min-h-[100dvh] items-center justify-center bg-slate-950 text-slate-300"
+        aria-label="Contact loading"
+      >
+        <p className="text-sm uppercase tracking-[0.2em]">Loading contact</p>
+      </section>
+    ),
+  },
 );
 
 export default function Home() {
@@ -67,9 +80,8 @@ export default function Home() {
         <SectionTransition className="opacity-30" />
         <EducationSection />
         <SectionTransition className="opacity-30" />
-        <ContactSection />
+        <CursorTrailContactSection />
       </main>
-      <Footer />
     </div>
   );
 }

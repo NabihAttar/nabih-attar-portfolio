@@ -57,7 +57,26 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full bg-slate-950 font-sans text-slate-100 selection:bg-cyan-300/30 selection:text-white">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&display=swap"
+        />
+      </head>
+      <body
+        className="min-h-full bg-slate-950 font-sans text-slate-100 selection:bg-cyan-300/30 selection:text-white"
+        style={{
+          "--font-cursor-trail-sans": "'Satoshi', ui-sans-serif, system-ui, sans-serif",
+          "--font-cursor-trail-mono": "'Geist Mono', ui-monospace, monospace",
+        }}
+      >
         {children}
       </body>
     </html>
